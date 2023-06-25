@@ -4,10 +4,8 @@ import './Body.css';
 export const Body = () => {
   return (
     <>
-      <div class="bg-image"></div>
-      <div class="bg-text">
-      <h1>I am John Doe</h1>
-      <p>And I'm a Photographer</p>
+      <div class="box-img">
+        <img src="C:/Users/HP/Railway_Management_System_FrontEnd/demo-react-app/src/Body/train.jpg" alt=" "/>
       </div>
     </>
   )
