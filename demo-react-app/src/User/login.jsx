@@ -1,36 +1,55 @@
-import React from "react";
-import "./login.css";
+import React, { useState } from "react";
+import '../App.jsx';
 
-export const login = () => {
+const Login = () => {
+    const [email, setEmail] = useState("");
+    const [pass, setPassword] = useState(" ");
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const userCred = {
+            email: email,
+            password: pass
+        }
+
+        fetch("http://localhost:5173/User", {
+            method: "POST",
+            headers: {"content-type":"application/json"},
+            body: JSON.stringify({userCred})
+        }).then((res)=> {
+            alert("Login Successful")
+            Navigate('/');
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    }
   return (
-    <div className="login">
-      <div className="div">
-        {/* <img className="rectangle" alt="Rectangle" src="" /> */}
-        <div className="overlap">
-          <h1 className="text-wrapper">Welcome</h1>
-          <div className="text-wrapper-2">Login to your account</div>
-        </div>
-        <div className="text-wrapper-3">Email</div>
-        <div className="text-wrapper-4">Password</div>
-        <div className="text-wrapper-5">Forgot Password?</div>
-        <div className="group">
-          <div className="text-wrapper-6">Create Now</div>
-          <div className="text-wrapper-7">Don’t have account?</div>
-        </div>
-        <div className="overlap-group">
-          <div className="text-wrapper-8">Email</div>
-        </div>
-        <div className="overlap-2">
-          <div className="text-wrapper-9">Password</div>
-          {/* <img className="img" alt="Group" src="group-8.png" /> */}
-        </div>
-        <div className="div-wrapper">
-          <div className="text-wrapper-10">Login</div>
-        </div>
-        {/* <img className="group-2" alt="Group" src="group-113.png" />
-        <img className="facebook" alt="Facebook" src="facebook-1.png" />
-        <img className="instagram" alt="Instagram" src="instagram.png" /> */}
-      </div>
-    </div>
+    <>
+    <section className="login__container">
+            <form onSubmit={handleSubmit} className="flex flex-col pt-3 md:pt-8 w-1/3 mx-auto z-10">
+                <div className="relative my-2">
+                    <label for="email" className="block text-md py-3 font-medium text-white">
+                        Email :
+                    </label>
+                    <input onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white  placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Email address" />
+                </div>
+                <div className="relative my-2">
+                    <label for="password" className="block text-md py-3 font-medium text-white">
+                        Password :
+                    </label>
+                    <input onChange={(e) => setPassword(e.target.value)} type="password" className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Password" />
+                </div>
+                <button type='submit' className="w-full my-8 px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-600 shadow-md hover:bg-green-700 focus:outline-none focus:ring-2">
+                    {/* <span className="w-full">
+                        {loading ? "Loading..." : "Log in"}
+                    </span> */}
+                </button>
+            </form>
+        </section>
+    </>
   );
-};
+}
+
+export default Login;
