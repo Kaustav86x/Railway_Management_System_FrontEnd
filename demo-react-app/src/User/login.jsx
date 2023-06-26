@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import '../App.jsx';
+import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import './Login.css';
+// import { FiArrowDownCircle, FiPlus } from 'react-icons/fi';
+// import { BiLogIn } from "react-icons/bi";
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -14,7 +19,7 @@ const Login = () => {
             password: pass
         }
 
-        fetch("http://localhost:5173/User", {
+        fetch(" ", {
             method: "POST",
             headers: {"content-type":"application/json"},
             body: JSON.stringify({userCred})
@@ -26,29 +31,33 @@ const Login = () => {
         })
     }
   return (
-    <>
-    <section className="login__container">
-            <form onSubmit={handleSubmit} className="flex flex-col pt-3 md:pt-8 w-1/3 mx-auto z-10">
-                <div className="relative my-2">
-                    <label for="email" className="block text-md py-3 font-medium text-white">
-                        Email :
-                    </label>
-                    <input onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white  placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Email address" />
+    <Container className="todo-container">
+        <div className="row d-flex justify-content-center h-50">
+            <div className="col-7">
+              <div className="card bg-light mt-5 text-center" id="loginCard" style={{borderradius: "1rem"}}>
+                <div className="card-body p-20">
+                    <h2 className="fw-bold mt-2 text-uppercase">Login</h2>
+                        <p className="text-black-50 mb-5">Please enter your Email and password!</p>
+        <Form className="form">
+            <Form.Group onSubmit={handleSubmit} className="mb-3" controlId="exampleForm.ControlInput1">
+                <div className="form-outline form-white mb-2">
+                    <Form.Label>Email Address :  </Form.Label>
+                    <Form.Control onChange={(e) => setEmail(e.target.value)} type="email" placeholder="name@example.com"/>
                 </div>
-                <div className="relative my-2">
-                    <label for="password" className="block text-md py-3 font-medium text-white">
-                        Password :
-                    </label>
-                    <input onChange={(e) => setPassword(e.target.value)} type="password" className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Password" />
+                </Form.Group>
+                <Form.Group onSubmit={handleSubmit} className="mb-3" controlId="exampleForm.ControlInput2">
+                <div className="form-outline form-white mb-3">
+                    <Form.Label>Password : </Form.Label>
+                    <Form.Control onChange={(e) => setEmail(e.target.value)} type="password" placeholder="password"/>
                 </div>
-                <button type='submit' className="w-full my-8 px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-600 shadow-md hover:bg-green-700 focus:outline-none focus:ring-2">
-                    {/* <span className="w-full">
-                        {loading ? "Loading..." : "Log in"}
-                    </span> */}
-                </button>
-            </form>
-        </section>
-    </>
+                <button type="button" class="loginButton btn-md">Login</button>
+            </Form.Group>
+        </Form>
+        </div>
+        </div>
+        </div>
+        </div>
+        </Container>
   );
 }
 

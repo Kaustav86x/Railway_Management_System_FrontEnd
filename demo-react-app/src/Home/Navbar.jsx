@@ -5,7 +5,7 @@ import './Navbar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.jsx';
 
-export const Navbar = () => {
+const Navbar = () => {
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark" id="navbarTop">
@@ -25,3 +25,5 @@ export const Navbar = () => {
 </>
   );
 }
+
+export default Navbar;

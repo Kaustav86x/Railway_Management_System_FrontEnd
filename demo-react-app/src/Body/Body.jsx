@@ -2,10 +2,12 @@ import React from 'react';
 import './Body.css';
 import '../App.jsx';
 
-export const Body = () => {
+const Body = () => {
   return (
     <>
-    <p>Hello</p>
+    {/* <p>Hello</p> */}
     </>
-  )
+  );
 }
+
+export default Body;
