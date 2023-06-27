@@ -9,42 +9,79 @@ import { BiLogIn } from "react-icons/bi";
 
 
 const Login = () => {
-    const navigate =  useNavigate();
-    const [message, setMessage] = useState("");
-    const [alret, setAlertClass] = useState(" ");
-    const [loading, setLoading] = useState(" ");
-    const [loginDetail, setLoginDetail] = useState({
-        Email: "abcd@gmail.com",
-        Password: "hello123"
-    });
+    // const navigate =  useNavigate();
+    // const [message, setMessage] = useState("");
+    // const [alret, setAlertClass] = useState(" ");
+    // const [loading, setLoading] = useState(" ");
+    // const [loginDetail, setLoginDetail] = useState({
+    //     Email: "abcd@gmail.com",
+    //     Password: "hello123"
+    // });
     
-    const handleInput = (event) => {
-        const { name, value } = event.target;
-        setLoginDetail((prev) => {
-          return { ...prev, [name]: value };
-        });
-      }
+    // const handleInput = (event) => {
+    //     const { name, value } = event.target;
+    //     setLoginDetail((prev) => {
+    //       return { ...prev, [name]: value };
+    //     });
+    //   }
 
-      // fetch api
-     const loginAPI = UserLoginAPI();
+    //   // fetch api
+    //  const loginAPI = UserLoginAPI();
 
-     const handleSubmit = async (e) => {
-        // prevents from reloading the page
+    //  const handleSubmit = async (e) => {
+    //     // prevents from reloading the page
+    //     e.preventDefault();
+    //     setLoading(true);
+    //     const response = await loginAPI(loginDetail);
+    //     setMessage(response.Massage);
+    //     if(response.StatusCode === 200) {
+    //         setLoading(false);
+    //         setAlertClass("alert-success show");
+    //         navigate('/Navbar');
+    //     }
+    //     else
+    //     {
+    //         setAlertClass("alert-danger show");
+    //     }
+    //  }; 
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [pass, setPassword] = useState('');
+    const [loading, setLoading] = useState('');
+    const [message, setMessage] = useState('');
+    const data = {
+        email: email,
+        password: pass
+    }
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const response = await loginAPI(loginDetail);
-        setMessage(response.Massage);
-        if(response.StatusCode === 200) {
-            setLoading(false);
-            setAlertClass("alert-success show");
-            navigate('/Navbar');
-        }
-        else
-        {
-            setAlertClass("alert-danger show");
-        }
-     }; 
+        try {
+            const res = await axios({
+                method: 'post',
+                url: 'https://localhost:7001/api/User/Login',
+                data: data
+            });
+    
+            toast(res.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
 
+            if (res.status === 200) {
+                setLoading(false);
+                localStorage.setItem("token", JSON.stringify(res.data.token));
+                navigate('/');
+            }
+        } catch (err) {
+            setLoading(false);
+        }
+    }
     //  const submitButton = () => {
     //     setAlertClass("d-none");
     //  }
@@ -60,11 +97,11 @@ const Login = () => {
             {/* <Form.Group onSubmit={handleSubmit} className="mb-3" controlId="exampleForm.ControlInput1"> */}
                 <div className="form-outline form-white mb-2">
                       <label className="form-label mt-1">Email: </label>
-                      <input type="email" id="typeEmailX" className="form-control form-control-lg" name='Email' value={loginDetail.Email} onChange={handleInput}/>
+                      <input type="email" id="typeEmailX" className="form-control form-control-lg" name='Email' onChange={(e) => setEmail(e.target.value)} placeholder="example@gmail.com"/>
                 </div>
                 <div className="form-outline form-white mb-3">
                       <label className="form-label mt-1">Password: </label>
-                      <input type="password" id="typePasswordX" className="form-control form-control-lg" name='Password' value={loginDetail.Password} onChange={handleInput}/>
+                      <input type="password" id="typePasswordX" className="form-control form-control-lg" name='Password' onChange={(e) => setPassword(e.target.value)} placeholder="password"/>
                 </div>
                 <button className="btn btn-outline-dark btn-md px-5 login-btn"onClick={handleSubmit}>Login<span><BiLogIn/></span></button>
         </div>
