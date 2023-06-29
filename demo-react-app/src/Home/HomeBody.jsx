@@ -10,7 +10,6 @@ export const HomeBody = () => {
         <div className="d-flex justify-content-center home-page">
           <div className="content">
             <h1 className='display-4 text-center mt-5'>Welcome to <strong>Flash Track</strong></h1>
-            {/* <Button variant="primary" size="lg">Explore Now !</Button> */}
             <Link className="btn btn-lg btn-outline-light" to ="/">Explore more !</Link>
           </div>
       </div>

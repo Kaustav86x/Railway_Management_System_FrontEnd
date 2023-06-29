@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import '../App.jsx';
-import { Form, Button, Row, Col, Container, Navbar } from 'react-bootstrap';
+import { Form, Button, Row, Col, Container, NavLink} from 'react-bootstrap';
 import './Login.css';
 import UserLoginAPI from "../Config/UserAPI.jsx";
 import { BiLogIn } from "react-icons/bi";
+import Navbar from "../Home/Navbar.jsx";
 
 
 
@@ -134,15 +135,32 @@ import { BiLogIn } from "react-icons/bi";
         };
   return (
     <>
-    <Navbar/>
+    <nav className="navbar sticky-top bg-dark navbar-expand-md py-3" data-bs-theme="dark" style={{ zIndex:"1035" }}>
+          <div className="container-fluid">
+            <Link to="/" className="navbar-brand fs-6 initialism">RailBook</Link>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+              <div className="navbar-nav Home-nav-list">
+                <Link className="nav-link mx-1" to="/">Home</Link>
+                <Link className="nav-link mx-1" to="/service">Services</Link>
+                <Link className="nav-link mx-1" to="/about">About</Link>
+                <Link className="nav-link mx-1" to="/contact">Contact</Link>
+                <span className="mx-3"></span>
+                <Link className="btn btn-md btn-outline-light mx-2" to="/signup">SignUp</Link>
+                <Link className="btn btn-md btn-outline-light mx-2" to="/login">Login</Link>
+              </div>
+            </div>
+          </div>
+      </nav>
       <Container className="todo-container">
         <div className="row d-flex justify-content-center h-50">
           <div className="col-7">
             <div
               className="card bg-light mt-5 text-center"
               id="loginCard"
-              style={{ borderradius: "1rem" }}
-            >
+              style={{ borderradius: "1rem" }}>
               <div className="card-body p-20">
                 <h2 className="fw-bold mt-2 text-uppercase">Login</h2>
                 <p className="text-black-50 mb-5">
@@ -181,6 +199,8 @@ import { BiLogIn } from "react-icons/bi";
                     <BiLogIn />
                   </span>
                 </button>
+                <p className="mt-2 checker-acc">
+            Don't have an account? <Link to="/Signup">Register</Link></p>
               </div>
             </div>
           </div>

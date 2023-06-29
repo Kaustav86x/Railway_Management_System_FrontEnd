@@ -7,6 +7,7 @@ import '../App.jsx';
 import { NavLink, Button } from 'react-bootstrap';
 import Reviews from './Review';
 import { HomeBody } from './HomeBody';
+import { Home } from '../Pages/Home';
 
 const Navbar = () => {
   return (
@@ -19,10 +20,10 @@ const Navbar = () => {
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
               <div className="navbar-nav Home-nav-list">
-                <NavLink className="nav-link mx-1" to="/">Home</NavLink>
-                <NavLink className="nav-link mx-1" to="/service">Services</NavLink>
-                <NavLink className="nav-link mx-1" to="/about">About</NavLink>
-                <NavLink className="nav-link mx-1" to="/contact">Contact</NavLink>
+                <Link className="nav-link mx-1" to="/">Home</Link>
+                <Link className="nav-link mx-1" to="/Services">Services</Link>
+                <Link className="nav-link mx-1" to="/about">About</Link>
+                <Link className="nav-link mx-1" to="/contact">Contact</Link>
                 <span className="mx-3"></span>
                 <Link className="btn btn-md btn-outline-light mx-2" to="/signup">SignUp</Link>
                 <Link className="btn btn-md btn-outline-light mx-2" to="/login">Login</Link>
