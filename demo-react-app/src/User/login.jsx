@@ -6,6 +6,8 @@ import './Login.css';
 import UserLoginAPI from "../Config/UserAPI.jsx";
 import { BiLogIn } from "react-icons/bi";
 import Navbar from "../Home/Navbar.jsx";
+// import { DashBoard } from '../Pages/DashBoard';
+import Dashboard from "../Pages/DashBoard.jsx";
 
 
 
@@ -123,7 +125,7 @@ import Navbar from "../Home/Navbar.jsx";
               window.alert("Login successful!");
               //window.location.reload();
               // Redirect to /units
-            window.location.href = "http://localhost:5173";
+            window.location.href = "http://localhost:5173/dashboard";
             })
             .catch((error) => {
               console.log(error);
@@ -135,25 +137,7 @@ import Navbar from "../Home/Navbar.jsx";
         };
   return (
     <>
-    <nav className="navbar sticky-top bg-dark navbar-expand-md py-3" data-bs-theme="dark" style={{ zIndex:"1035" }}>
-          <div className="container-fluid">
-            <Link to="/" className="navbar-brand fs-6 initialism">RailBook</Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-              <div className="navbar-nav Home-nav-list">
-                <Link className="nav-link mx-1" to="/">Home</Link>
-                <Link className="nav-link mx-1" to="/service">Services</Link>
-                <Link className="nav-link mx-1" to="/about">About</Link>
-                <Link className="nav-link mx-1" to="/contact">Contact</Link>
-                <span className="mx-3"></span>
-                <Link className="btn btn-md btn-outline-light mx-2" to="/signup">SignUp</Link>
-                <Link className="btn btn-md btn-outline-light mx-2" to="/login">Login</Link>
-              </div>
-            </div>
-          </div>
-      </nav>
+    <Navbar/>
       <Container className="todo-container">
         <div className="row d-flex justify-content-center h-50">
           <div className="col-7">
@@ -166,8 +150,9 @@ import Navbar from "../Home/Navbar.jsx";
                 <p className="text-black-50 mb-5">
                   Please enter your Email and password!
                 </p>
+                <div className='py-3'/>
                 <div className="form-outline form-white mb-2">
-                  <label className="form-label mt-1">Email: </label>
+                  {/* <label className="form-label mt-1">Email: </label> */}
                   <input
                     type="email"
                     className="form-control"
@@ -178,8 +163,9 @@ import Navbar from "../Home/Navbar.jsx";
                     required
                   />
                 </div>
+                <div className='py-3'/>
                 <div className="form-outline form-white mb-3">
-                  <label className="form-label mt-1">Password: </label>
+                  {/* <label className="form-label mt-1">Password: </label> */}
                   <input
                     type="password"
                     className="form-control"

@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Form, Button, Card, Container } from 'react-bootstrap';
 import { BiPowerOff } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import Navbar from '../Home/Navbar';
+// import './Login.css';
+import './Register.css';
 
 const Register = () => {
   const [userType, setUserType] = useState('');
   const [formData, setFormData] = useState({
-    firstName: " ",
+    firstName: '',
     lastName: '',
     phone: '',
     email: '',
@@ -30,37 +33,10 @@ const Register = () => {
     // Handle form submission logic here
     console.log(formData);
   };
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(`First Name: ${firstName}, Last Name: ${lastName}, Email: ${email}, Password: ${password}`);
-  // }
 
   return (
     <>
-          <nav className="navbar sticky-top bg-dark navbar-expand-md py-3" data-bs-theme="dark" style={{ zIndex:"1035" }}>
-          <div className="container-fluid">
-            <Link to="/" className="navbar-brand fs-6 initialism">RailBook</Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-              <div className="navbar-nav Home-nav-list">
-                <Link className="nav-link mx-1" to="/">Home</Link>
-                <Link className="nav-link mx-1" to="/Services">Services</Link>
-                <Link className="nav-link mx-1" to="/about">About</Link>
-                <Link className="nav-link mx-1" to="/contact">Contact</Link>
-                <span className="mx-3"></span>
-                <Link className="btn btn-md btn-outline-light mx-2" to="/signup">SignUp</Link>
-                <Link className="btn btn-md btn-outline-light mx-2" to="/login">Login</Link>
-              </div>
-            </div>
-          </div>
-      </nav>
+      <Navbar/>
       {/* <div className="row d-flex justify-content-center h-50">
         <div className="col-7">
           <div className="card bg-light mt-5 text-center"
@@ -172,23 +148,78 @@ const Register = () => {
     <Card>
       <Card.Body>
         <h3><strong>Registration Form</strong></h3>
+        <div className='py-3'/>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formFirstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter first name" name="fname" value={formData.firstName} onChange={handleInputChange} required />
+            {/* <Form.Label>First Name</Form.Label> */}
+            <input
+                type="text"
+                className="form-control"
+                name="fname"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                placeholder="First Name"
+                required
+              />
           </Form.Group>
+          <div className='py-3'/>
           <Form.Group controlId="formLastName">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter last name" name="lname" value={formData.lastName} onChange={handleInputChange} required />
+            {/* <Form.Label>Last Name</Form.Label> */}
+            <input
+                type="text"
+                className="form-control"
+                name="lname"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                placeholder="Last Name"
+                required
+              />
           </Form.Group>
+          <div className='py-3'/>
+          <Form.Group controlId="formPhone">
+            {/* <Form.Label>Phone</Form.Label> */}
+            <input
+                type="text"
+                className="form-control"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="Phone Number"
+                required
+              />
+          </Form.Group>
+          <div className='py-3'/>
           <Form.Group controlId="formEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" name="email" value={formData.email} onChange={handleInputChange} required />
+            {/* <Form.Label>Email address</Form.Label> */}
+            <input
+                type="email"
+                className="form-control"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="Email"
+                required
+              />
           </Form.Group>
+          <div className='py-3'/>
           <Form.Group controlId="formPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name="passsword" value={formData.password} onChange={handleInputChange} required />
+            {/* <Form.Label>Password</Form.Label> */}
+            <input type="password" className="form-control" name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" required />
           </Form.Group>
+          <div className='py-3'/>
+          <Form.Group controlId="formRole">
+            {/* <Form.Label>Role</Form.Label> */}
+            <input
+                type="text"
+                className="form-control"
+                name="role"
+                value={formData.role}
+                onChange={handleInputChange}
+                placeholder="Role"
+                required
+              />
+          </Form.Group>
+          <div className='py-2'/>
           <button className="btn btn-outline-dark btn-md px-5 login-btn" onClick={handleSubmit}> Submit 
           <span>
           <BiPowerOff />
