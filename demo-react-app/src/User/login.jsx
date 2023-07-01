@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Navigate, Outlet, Router, useNavigate } from 'react-router-dom';
 import '../App.jsx';
 import { Form, Button, Row, Col, Container, NavLink} from 'react-bootstrap';
 import './Login.css';
@@ -120,12 +120,20 @@ import Dashboard from "../Pages/DashBoard.jsx";
             })
             .then((data) => {
               console.log(data.token);
+              console.log(data.userRole);
               // Save the token in local storage
               localStorage.setItem("token",data.token);
+              // Saving the role in local storage
+              localStorage.setItem("userRole",data.userRole);
               window.alert("Login successful!");
               //window.location.reload();
               // Redirect to /units
             window.location.href = "http://localhost:5173/dashboard";
+            // <Router>
+            //   {/* <Routes> */}
+            //   <Route path="/Dashboard" exact element={<Dashboard/>}></Route>
+            //   {/* </Routes> */}
+            // </Router>
             })
             .catch((error) => {
               console.log(error);

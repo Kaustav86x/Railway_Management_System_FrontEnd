@@ -14,6 +14,7 @@ import Contact from "./Pages/Contact";
 import { useState, useEffect } from "react";
 import Dashboard from "./Pages/DashBoard";
 import TrainListing from "./Pages/Train/TrainList";
+import ReserveTrain from "./Pages/Train/AddReservation";
 
 function App() {
   const[isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,6 +54,7 @@ function App() {
             <Route path="/SignUp" exact element={<Register/>}/>
             <Route path="/Dashboard" exact element={<Dashboard/>}/>
             <Route path="/TrainListing" exact element={<TrainListing/>}/>
+            <Route path="/train/ReserveTrain" exact element={<ReserveTrain/>}/>
         </Routes>
         </div>
       </Router>

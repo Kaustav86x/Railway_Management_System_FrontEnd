@@ -232,17 +232,20 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import Dashboard from "../DashBoard";
+import ReserveTrain from "./AddReservation";
 
 const GetAllTrains = () => {
-  const userRole = localStorage.getItem("userRole");
+  
   const [trainData, setTrainData] = useState([]);
+  const userRole = localStorage.getItem("userRole");
 
   const handleDelete = (id) => {
         const token = localStorage.getItem("token"); // Retrieve the token from local storage
+        // const userRole = localStorage.getItem("userRole");
         console.log(id);
-        // console.log(token);
     
-        if (window.confirm("Do you want to remove?")) {
+        if (window.confirm("Do you want to remove the train ?")) {
           fetch(`https://localhost:7001/api/Train_detail/DeleteTrain?id=${id}`, {
             method: "DELETE",
             headers: {
@@ -279,8 +282,10 @@ const GetAllTrains = () => {
   console.log(trainData);
 
   return (
+    <>
+    <Dashboard/>
     <div className="content-container">
-      <h2 className="Trainhead">Train Listing</h2>
+      <h2 className="Trainhead">Available Trains</h2>
 
       <table className="table table-bordered tbl table-hover">
         <thead className="bg-dark text-white tableHead">
@@ -293,6 +298,7 @@ const GetAllTrains = () => {
             <th>Departure Time</th>
             <th>Date of Departure</th>
             <th>Duration</th>
+            {userRole === "Admin" && <th>Edit</th>}
           </tr>
         </thead>
         <tbody>
@@ -307,24 +313,39 @@ const GetAllTrains = () => {
               <td>{train.dept_time}</td>
               <td>{train.dateOfDeparture}</td>
               <td>{train.duration} hours</td>
-              <td><Link
+              {userRole === "Admin" && (<td>
+                <Link
                     to={`/train/edit/${train.id}`}
                     className="btn btn-primary btn-sm mr-2 edit-btn"
-                    style={{ marginRight: "10px" }}
-                  >
+                    style={{ marginRight: "10px" }}>
                     Edit
                   </Link>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(train.id)}
-                  >
+                    onClick={() => handleDelete(train.id)}>
                     Delete
-                  </button></td>
+                  </button>
+                  <Link to={`/train/ReserveTrain`}
+                  className="btn btn-success btn-sm mr-2 edit-btn"
+                  style={{ marginRight: "10px" }}>
+                  Book
+                  </Link>
+                </td>)}
+                {userRole === "Passenger" && (
+                  <td>
+                  <Link to={`/train/ReserveTrain`}
+                  className="btn btn-success btn-sm mr-2 edit-btn"
+                  style={{ marginRight: "10px" }}>
+                  Book
+                  </Link>
+                  </td>
+                )}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

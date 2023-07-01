@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Nav, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import TrainListing from "./Train/TrainList";
+import ReserveTrain from "./Train/AddReservation";
 
 const Dashboard = () => {
   return (
@@ -14,10 +15,10 @@ const Dashboard = () => {
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
               <div className="navbar-nav Home-nav-list">
-                <Link className="nav-link mx-1" to="/TrainListing">Book Train</Link>
+                <Link className="nav-link mx-1" to="/TrainListing">Trains</Link>
                 <Link className="nav-link mx-1" to="/trainDetails">Train Details</Link>
-                <Link className="nav-link mx-1" to="/reservDetails">Reservation Details</Link>
-                <Link className="nav-link mx-1" to="/paymentDetails">Payment Details</Link>
+                <Link className="nav-link mx-1" to="/ReserveTrain">Reservation</Link>
+                <Link className="nav-link mx-1" to="/paymentDetails">Payment</Link>
                 <span className="mx-3"></span>
                 {/* <Link className="btn btn-md btn-outline-light mx-2" to="/signup">SignUp</Link>
                 <Link className="btn btn-md btn-outline-light mx-2" to="/login">Login</Link> */}
