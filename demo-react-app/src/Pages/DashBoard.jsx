@@ -6,8 +6,19 @@ import ReserveTrain from "./Train/AddReservation";
 
 const Dashboard = () => {
 
-  // fetching the userRole from the local storage
-  const userRole = localStorage.getItem("userRole"); 
+  const handleLogout = () => {
+    const userRole = localStorage.getItem("userRole");
+    localStorage.removeItem("token");
+    
+    window.location.href = "/login";
+  };
+
+    // fetching the userRole from the local storage
+  // this is the current logged in user
+  const userRole = localStorage.getItem("userRole");
+  const userName = localStorage.getItem("userName");
+  console.log(userName);
+  console.log(userRole);
 
   return (
     <div>
@@ -24,16 +35,25 @@ const Dashboard = () => {
                 <Link className="nav-link mx-1" to="/Reservation">Reservation</Link>
                 <Link className="nav-link mx-1" to="/ticket">Ticket</Link>
                 <Link className="nav-link mx-1" to="/paymentDetails">Payment</Link>
+                <div className="mx-4"/>
+                <div className="py-2"/>
+                <div className="UserRoleName">
+                  <a href="#" class="btn btn-secondary btn-md active" role="button" aria-pressed="true">{userRole}</a>
+                  <a href="#" class="btn btn-secondary btn-md active" role="button" aria-pressed="true">{userName}</a>
+                </div>
+                <div className="navbar-nav ml-auto">
+                  <button className="btn btn-md btn-outline-light mx-2" onClick={handleLogout}>
+                    LogOut
+                  </button>
+                </div>
                 <span className="mx-3"></span>
               </div>
             </div>
           </div>
       </nav>
       <div className="container my-4">
-        {/* Your page content goes here */}
       </div>
     </div>
   );
 };
-
 export default Dashboard;

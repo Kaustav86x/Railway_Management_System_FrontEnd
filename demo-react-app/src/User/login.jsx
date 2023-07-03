@@ -10,86 +10,6 @@ import Navbar from "../Home/Navbar.jsx";
 import Dashboard from "../Pages/DashBoard.jsx";
 
 
-
-// const Login = () => {
-    // const navigate =  useNavigate();
-    // const [message, setMessage] = useState("");
-    // const [alret, setAlertClass] = useState(" ");
-    // const [loading, setLoading] = useState(" ");
-    // const [loginDetail, setLoginDetail] = useState({
-    //     Email: "abcd@gmail.com",
-    //     Password: "hello123"
-    // });
-    
-    // const handleInput = (event) => {
-    //     const { name, value } = event.target;
-    //     setLoginDetail((prev) => {
-    //       return { ...prev, [name]: value };
-    //     });
-    //   }
-
-    //   // fetch api
-    //  const loginAPI = UserLoginAPI();
-
-    //  const handleSubmit = async (e) => {
-    //     // prevents from reloading the page
-    //     e.preventDefault();
-    //     setLoading(true);
-    //     const response = await loginAPI(loginDetail);
-    //     setMessage(response.Massage);
-    //     if(response.StatusCode === 200) {
-    //         setLoading(false);
-    //         setAlertClass("alert-success show");
-    //         navigate('/Navbar');
-    //     }
-    //     else
-    //     {
-    //         setAlertClass("alert-danger show");
-    //     }
-    //  }; 
-    // const navigate = useNavigate();
-    // const [email, setEmail] = useState('');
-    // const [pass, setPassword] = useState('');
-    // const [loading, setLoading] = useState('');
-    // const [message, setMessage] = useState('');
-
-    // const data = {
-    //     email: "example@gmail.com",
-    //     password: "admin123"
-    // }
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setLoading(true);
-    //     try {
-    //         const res = await axios({
-    //             method: "POST",
-    //             url: "https://localhost:7001/api/User/Login",
-    //             data: JSON.stringify(data)
-    //         });
-    
-    //         toast(res.data.message, {
-    //             position: "top-right",
-    //             autoClose: 5000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             });
-
-    //         if (res.status === 200) {
-    //             setLoading(false);
-    //             localStorage.setItem("token", JSON.stringify(res.data.token));
-    //             setMessage()
-    //             navigate('/');
-    //         }
-    //     } catch (err) {
-    //         setLoading(false);
-    //     }
-    // }
-    //  const submitButton = () => {
-    //     setAlertClass("d-none");
-    //  }
     const Login = () => {
         const [credentials, setCredentials] = useState({ email: "", password: "" });
         const [message, setMessage] = useState("");
@@ -115,7 +35,7 @@ import Dashboard from "../Pages/DashBoard.jsx";
               if (res.ok) {
                 return res.json();
               } else {
-                throw new Error("Login failed");
+                throw new Error("User Login failed");
               }
             })
             .then((data) => {
@@ -125,15 +45,10 @@ import Dashboard from "../Pages/DashBoard.jsx";
               localStorage.setItem("token",data.token);
               // Saving the role in local storage
               localStorage.setItem("userRole",data.userRole);
+              localStorage.setItem("userName",data.userName);
               window.alert("Login successful!");
-              //window.location.reload();
               // Redirect to /units
             window.location.href = "http://localhost:5173/dashboard";
-            // <Router>
-            //   {/* <Routes> */}
-            //   <Route path="/Dashboard" exact element={<Dashboard/>}></Route>
-            //   {/* </Routes> */}
-            // </Router>
             })
             .catch((error) => {
               console.log(error);
@@ -193,6 +108,7 @@ import Dashboard from "../Pages/DashBoard.jsx";
                     <BiLogIn />
                   </span>
                 </button>
+                <div className="py-2"/>
                 <p className="mt-2 checker-acc">
             Don't have an account? <Link to="/Signup">Register</Link></p>
               </div>

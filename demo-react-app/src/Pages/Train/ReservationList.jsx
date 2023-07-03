@@ -8,6 +8,8 @@ const Reservation = () => {
   
   const [reserve, setReserve] = useState([]);
   const userRole = localStorage.getItem("userRole");
+  // fetching the current logged in name
+  const userName = localStorage.getItem("userName");
 
   const handleDelete = (id) => {
         const token = localStorage.getItem("token"); // Retrieve the token from local storage
@@ -65,6 +67,7 @@ const Reservation = () => {
             <th>User ID</th>
             <th>Train ID</th>
             {userRole === "Admin" && <th>Edit</th>}
+            {userRole === "Passenger" && <th></th>}
           </tr>
         </thead>
         <tbody>
@@ -91,14 +94,11 @@ const Reservation = () => {
           ))}
         </tbody>
       </table>
-
-      {userRole === "Admin" && (
         <Link to={`/train/ReserveTrain`}
                   className="btn btn-outline-success btn-sm mr-2 edit-btn"
                   style={{ marginRight: "10px" }}>
                   Add Reservation
         </Link>
-      )}
     </div>
     </>
   );

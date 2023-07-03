@@ -177,6 +177,9 @@ const Register = () => {
     <Card>
       <Card.Body>
         <h3><strong>Registration Form</strong></h3>
+        <p className="text-black-50 mb-5">
+          Please enter your details!
+        </p>
         <div className='py-3'/>
         <Form onSubmit={handleSubmit}>
         {/* <Form.Group controlId="formId">

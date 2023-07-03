@@ -122,9 +122,9 @@ const ReserveTrain = () => {
           />
         </Form.Group>
         <div className='py-2'/>
-        <Button variant="primary" type="submit">
+        <button className="btn btn-outline-success btn-sm mr-2 edit-btn" type="submit">
           Submit
-        </Button>
+        </button>
         <div className='py-2'/>
         <Link to={`/Reservation`}
                   className="btn btn-outline-dark btn-sm mr-2 edit-btn"
