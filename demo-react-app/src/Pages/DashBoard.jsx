@@ -34,7 +34,7 @@ const Dashboard = () => {
                 {/* <Link className="nav-link mx-1" to="/trainDetails">Train Details</Link> */}
                 <Link className="nav-link mx-1" to="/Reservation">Reservation</Link>
                 <Link className="nav-link mx-1" to="/ticket">Ticket</Link>
-                <Link className="nav-link mx-1" to="/paymentDetails">Payment</Link>
+                <Link className="nav-link mx-1" to="/PaymentPage">Payment</Link>
                 <div className="mx-4"/>
                 <div className="py-2"/>
                 <div className="UserRoleName">

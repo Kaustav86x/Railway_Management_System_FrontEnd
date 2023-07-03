@@ -182,17 +182,6 @@ const Register = () => {
         </p>
         <div className='py-3'/>
         <Form onSubmit={handleSubmit}>
-        {/* <Form.Group controlId="formId">
-            <input
-                type="text"
-                className="form-control"
-                name="id"
-                value={formData.id}
-                onChange={handleChange}
-                placeholder="ID"
-                required
-              />
-          </Form.Group> */}
           <div className='py-3'/>
           <Form.Group controlId="formFirstName">
             <input

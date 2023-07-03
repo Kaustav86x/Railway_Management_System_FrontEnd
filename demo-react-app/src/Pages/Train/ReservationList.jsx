@@ -52,13 +52,19 @@ const Reservation = () => {
 
   console.log(reserve);
 
+  // const elements = [];
+  // for (let i in reserve)
+  // {
+  //   if(userName === i.)
+  // }
+
   return (
     <>
     <Dashboard/>
     <div className="content-container">
       <h2 className="Trainhead text-center">Reservations</h2>
       <div className="py-2"/>
-      <table className="table table-bordered tbl table-hover">
+        <table className="table table-bordered tbl table-hover">
         <thead className="bg-dark text-white tableHead">
           <tr>
             <th>ID</th>
@@ -67,7 +73,7 @@ const Reservation = () => {
             <th>User ID</th>
             <th>Train ID</th>
             {userRole === "Admin" && <th>Edit</th>}
-            {userRole === "Passenger" && <th></th>}
+            {userRole === "Passenger" && <th>  </th>}
           </tr>
         </thead>
         <tbody>
@@ -88,11 +94,12 @@ const Reservation = () => {
                     Delete
                   </button>
                   <div className="px-2"/>
-                </td>
+              </td>
                 )}
             </tr>
           ))}
         </tbody>
+        {/* )} */}
       </table>
         <Link to={`/train/ReserveTrain`}
                   className="btn btn-outline-success btn-sm mr-2 edit-btn"

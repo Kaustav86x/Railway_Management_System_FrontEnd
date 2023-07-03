@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../../Home/Navbar';
 
 const EditReservation = () => {
   return (
-    <div>EditReservation</div>
+    <>
+    <Navbar/>
+    </>
   )
 }
 

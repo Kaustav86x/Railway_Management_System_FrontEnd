@@ -17,6 +17,7 @@ import TrainListing from "./Pages/Train/TrainList";
 import ReserveTrain from "./Pages/Train/AddReservation";
 import TicketForm from "./Pages/Ticket.jsx";
 import Reservation from "./Pages/Train/ReservationList";
+import { PaymentPage } from "./Pages/Payment";
 
 function App() {
   const[isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,7 +60,7 @@ function App() {
             <Route path="/Reservation" exact element={<Reservation/>}/>
             <Route path="/train/ReserveTrain" exact element={<ReserveTrain/>}/>
             <Route path="/train/" exact element={<TicketForm/>}/>
-
+            <Route path="/PaymentPage" exact element={<PaymentPage/>}/>
         </Routes>
         </div>
       </Router>
