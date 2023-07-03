@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from '../DashBoard';
+import { useEffect } from 'react';
 
 const ReserveTrain = () => {
+  const [reservData, setreservData] = useState([]);
   const [reservationData, setReservationData] = useState({
+    rid:'',
     passenger: '',
     date: '',
     userId: '',
@@ -22,10 +25,24 @@ const ReserveTrain = () => {
     }));
   };
 
+  useEffect(() => {
+    fetch(`https://localhost:7001/api/Reservation/GetReservations`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReservationData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    // const res_id = prompt("Enter the resid");
+    // reservationData.rid = res_id;
     const token = localStorage.getItem('token');
-    fetch('https://localhost:7100/api/Reservation/AddReservation', {
+    const userRole = localStorage.getItem("userRole");
+    fetch(`https://localhost:7001/api/Reservation/AddReservation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +53,8 @@ const ReserveTrain = () => {
       .then((res) => {
         if (res.ok) {
           alert('Reservation created successfully!');
-          history.push('/');
+          // history.push('/');
+          window.location.href = "http://localhost:5173/dashboard";
         } else {
           throw new Error('Error creating reservation');
         }
@@ -50,8 +68,18 @@ const ReserveTrain = () => {
     <>
     <Dashboard/>
     <div className="content-container">
-      <h2>Create Reservation</h2>
+      <h2 className='text-center'>Create Reservation</h2>
       <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="rid">
+          <Form.Label>ID</Form.Label>
+          <Form.Control
+            type="text"
+            name="rid"
+            value={reservationData.rid}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
         <Form.Group controlId="passenger">
           <Form.Label>Passenger</Form.Label>
           <Form.Control

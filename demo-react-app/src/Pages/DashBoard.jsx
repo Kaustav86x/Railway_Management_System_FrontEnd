@@ -9,15 +9,16 @@ const Dashboard = () => {
     <div>
       <nav className="navbar sticky-top bg-dark navbar-expand-md py-3" data-bs-theme="dark" style={{ zIndex:"1035" }}>
           <div className="container-fluid">
-            <Link to="/" className="navbar-brand fs-6 initialism">RailBook</Link>
+            <Link to="/dashboard" className="navbar-brand fs-6 initialism">RailBook</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
               <div className="navbar-nav Home-nav-list">
                 <Link className="nav-link mx-1" to="/TrainListing">Trains</Link>
-                <Link className="nav-link mx-1" to="/trainDetails">Train Details</Link>
-                <Link className="nav-link mx-1" to="/ReserveTrain">Reservation</Link>
+                {/* <Link className="nav-link mx-1" to="/trainDetails">Train Details</Link> */}
+                <Link className="nav-link mx-1" to="/train/ReserveTrain">Reservation</Link>
+                <Link className="nav-link mx-1" to="/ticket">Ticket</Link>
                 <Link className="nav-link mx-1" to="/paymentDetails">Payment</Link>
                 <span className="mx-3"></span>
                 {/* <Link className="btn btn-md btn-outline-light mx-2" to="/signup">SignUp</Link>

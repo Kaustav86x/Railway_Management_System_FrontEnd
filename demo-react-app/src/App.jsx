@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import Dashboard from "./Pages/DashBoard";
 import TrainListing from "./Pages/Train/TrainList";
 import ReserveTrain from "./Pages/Train/AddReservation";
+import TicketForm from "./Pages/Ticket.jsx";
 
 function App() {
   const[isLoggedIn, setIsLoggedIn] = useState(false);
@@ -55,6 +56,7 @@ function App() {
             <Route path="/Dashboard" exact element={<Dashboard/>}/>
             <Route path="/TrainListing" exact element={<TrainListing/>}/>
             <Route path="/train/ReserveTrain" exact element={<ReserveTrain/>}/>
+            <Route path="/train/" exact element={<TicketForm/>}/>
         </Routes>
         </div>
       </Router>

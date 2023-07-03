@@ -285,7 +285,7 @@ const GetAllTrains = () => {
     <>
     <Dashboard/>
     <div className="content-container">
-      <h2 className="Trainhead">Available Trains</h2>
+      <h2 className="Trainhead text-center">Available Trains</h2>
 
       <table className="table table-bordered tbl table-hover">
         <thead className="bg-dark text-white tableHead">
@@ -313,24 +313,28 @@ const GetAllTrains = () => {
               <td>{train.dept_time}</td>
               <td>{train.dateOfDeparture}</td>
               <td>{train.duration} hours</td>
-              {userRole === "Admin" && (<td>
+              {userRole === "Admin" && (
+              <td>
                 <Link
                     to={`/train/edit/${train.id}`}
                     className="btn btn-primary btn-sm mr-2 edit-btn"
                     style={{ marginRight: "10px" }}>
                     Edit
                   </Link>
+                  <div className="px-2"/>
                   <button
                     className="btn btn-danger btn-sm"
                     onClick={() => handleDelete(train.id)}>
                     Delete
                   </button>
+                  <div className="px-2"/>
                   <Link to={`/train/ReserveTrain`}
                   className="btn btn-success btn-sm mr-2 edit-btn"
                   style={{ marginRight: "10px" }}>
                   Book
                   </Link>
-                </td>)}
+                </td>
+                )}
                 {userRole === "Passenger" && (
                   <td>
                   <Link to={`/train/ReserveTrain`}

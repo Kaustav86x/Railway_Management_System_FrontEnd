@@ -3,35 +3,64 @@ import { Form, Button, Card, Container } from 'react-bootstrap';
 import { BiPowerOff } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import Navbar from '../Home/Navbar';
+import axios from 'axios';
 // import './Login.css';
 import './Register.css';
+import Dashboard from '../Pages/DashBoard';
 
 const Register = () => {
-  const [userType, setUserType] = useState('');
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    // id:'',
+    fname: '',
+    lname: '',
     phone: '',
     email: '',
     password: '',
-    role:''
+    role: 'P'
   });
 
-  const handleUserTypeChange = (event) => {
-    setUserType(event.target.value);
-  };
+  // const history = useHistory();
 
-  const handleInputChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post('https://localhost:7001/api/User/SignUp', formData);
+  //     if (response.status === 200) {
+  //       alert("Explore more with Flash Track")
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission logic here
     console.log(formData);
+    const token = localStorage.getItem('token');
+    const userRole = localStorage.getItem("userRole");
+    fetch(`https://localhost:7001/api/User/SignUp`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert('User Registration successful !!');
+          window.location.href = "http://localhost:5173/dashboard";
+        } else {
+          throw new Error('Error creating registration !');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -150,71 +179,84 @@ const Register = () => {
         <h3><strong>Registration Form</strong></h3>
         <div className='py-3'/>
         <Form onSubmit={handleSubmit}>
+        {/* <Form.Group controlId="formId">
+            <input
+                type="text"
+                className="form-control"
+                name="id"
+                value={formData.id}
+                onChange={handleChange}
+                placeholder="ID"
+                required
+              />
+          </Form.Group> */}
+          <div className='py-3'/>
           <Form.Group controlId="formFirstName">
-            {/* <Form.Label>First Name</Form.Label> */}
             <input
                 type="text"
                 className="form-control"
                 name="fname"
                 value={formData.firstName}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 placeholder="First Name"
                 required
               />
           </Form.Group>
           <div className='py-3'/>
           <Form.Group controlId="formLastName">
-            {/* <Form.Label>Last Name</Form.Label> */}
             <input
                 type="text"
                 className="form-control"
                 name="lname"
                 value={formData.lastName}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 placeholder="Last Name"
                 required
               />
           </Form.Group>
           <div className='py-3'/>
           <Form.Group controlId="formPhone">
-            {/* <Form.Label>Phone</Form.Label> */}
             <input
                 type="text"
                 className="form-control"
                 name="phone"
                 value={formData.phone}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 placeholder="Phone Number"
                 required
               />
           </Form.Group>
           <div className='py-3'/>
           <Form.Group controlId="formEmail">
-            {/* <Form.Label>Email address</Form.Label> */}
             <input
                 type="email"
                 className="form-control"
                 name="email"
                 value={formData.email}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 placeholder="Email"
                 required
               />
           </Form.Group>
           <div className='py-3'/>
           <Form.Group controlId="formPassword">
-            {/* <Form.Label>Password</Form.Label> */}
-            <input type="password" className="form-control" name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" required />
+            <input type="password" 
+            className="form-control" 
+            name="password" 
+            value={formData.password} 
+            onChange={handleChange} 
+            placeholder="Password" 
+            required 
+            />
           </Form.Group>
           <div className='py-3'/>
           <Form.Group controlId="formRole">
-            {/* <Form.Label>Role</Form.Label> */}
             <input
                 type="text"
                 className="form-control"
                 name="role"
                 value={formData.role}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 placeholder="Role"
                 required
               />
