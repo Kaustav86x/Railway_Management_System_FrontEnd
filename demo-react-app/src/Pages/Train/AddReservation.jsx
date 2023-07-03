@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from '../DashBoard';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const ReserveTrain = () => {
   const [reservData, setreservData] = useState([]);
@@ -54,7 +55,7 @@ const ReserveTrain = () => {
         if (res.ok) {
           alert('Reservation created successfully!');
           // history.push('/');
-          window.location.href = "http://localhost:5173/dashboard";
+          window.location.href = "http://localhost:5173/Reservation";
         } else {
           throw new Error('Error creating reservation');
         }
@@ -120,9 +121,16 @@ const ReserveTrain = () => {
             required
           />
         </Form.Group>
+        <div className='py-2'/>
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <div className='py-2'/>
+        <Link to={`/Reservation`}
+                  className="btn btn-outline-dark btn-sm mr-2 edit-btn"
+                  style={{ marginRight: "10px" }}>
+                  Reservation List
+        </Link>
       </Form>
     </div>
     </>

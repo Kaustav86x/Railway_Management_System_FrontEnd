@@ -5,6 +5,10 @@ import TrainListing from "./Train/TrainList";
 import ReserveTrain from "./Train/AddReservation";
 
 const Dashboard = () => {
+
+  // fetching the userRole from the local storage
+  const userRole = localStorage.getItem("userRole"); 
+
   return (
     <div>
       <nav className="navbar sticky-top bg-dark navbar-expand-md py-3" data-bs-theme="dark" style={{ zIndex:"1035" }}>
@@ -17,12 +21,10 @@ const Dashboard = () => {
               <div className="navbar-nav Home-nav-list">
                 <Link className="nav-link mx-1" to="/TrainListing">Trains</Link>
                 {/* <Link className="nav-link mx-1" to="/trainDetails">Train Details</Link> */}
-                <Link className="nav-link mx-1" to="/train/ReserveTrain">Reservation</Link>
+                <Link className="nav-link mx-1" to="/Reservation">Reservation</Link>
                 <Link className="nav-link mx-1" to="/ticket">Ticket</Link>
                 <Link className="nav-link mx-1" to="/paymentDetails">Payment</Link>
                 <span className="mx-3"></span>
-                {/* <Link className="btn btn-md btn-outline-light mx-2" to="/signup">SignUp</Link>
-                <Link className="btn btn-md btn-outline-light mx-2" to="/login">Login</Link> */}
               </div>
             </div>
           </div>

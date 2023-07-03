@@ -10,7 +10,7 @@ const About = () => {
         <Container>
           <Row className="my-5">
             <Col md={6}>
-            <img src={"/Images/3.png"} rounded fluid />
+            <img src={"src/Images/3.png"} rounded fluid />
             </Col>
             <Col md={6} className="d-flex align-items-center">
               <div>

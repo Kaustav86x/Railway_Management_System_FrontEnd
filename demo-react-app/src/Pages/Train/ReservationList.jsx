@@ -15,7 +15,7 @@ const Reservation = () => {
         console.log(id);
     
         if (window.confirm("Do you want to remove the reservation ?")) {
-          fetch(`https://localhost:7001/api/Train_detail/DeleteTrain?id=${id}`, {
+          fetch(`https://localhost:7001/api/Reservation/DeleteReservation?id=${id}`, {
             method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`, // Include the token in the authorization header
@@ -38,7 +38,7 @@ const Reservation = () => {
       };
 
   useEffect(() => {
-    fetch("https://localhost:7001/api/Train_detail/GetTrains")
+    fetch("https://localhost:7001/api/Reservation/GetReservations")
       .then((res) => res.json())
       .then((data) => {
         setReserve(data);
@@ -55,7 +55,7 @@ const Reservation = () => {
     <Dashboard/>
     <div className="content-container">
       <h2 className="Trainhead text-center">Reservations</h2>
-
+      <div className="py-2"/>
       <table className="table table-bordered tbl table-hover">
         <thead className="bg-dark text-white tableHead">
           <tr>
@@ -64,9 +64,6 @@ const Reservation = () => {
             <th>Date</th>
             <th>User ID</th>
             <th>Train ID</th>
-            {/* <th>Departure Time</th>
-            <th>Date of Departure</th>
-            <th>Duration</th> */}
             {userRole === "Admin" && <th>Edit</th>}
           </tr>
         </thead>
@@ -77,19 +74,10 @@ const Reservation = () => {
               <td>{res.id}</td>
               <td>{res.passenger}</td>
               <td>{res.date}</td>
-              <td>{res.user_id}</td>
-              <td>{res.train_id}</td>
-              {/* <td>{res.dept_time}</td>
-              <td>{res.dateOfDeparture}</td>
-              <td>{res.duration} hours</td> */}
+              <td>{res.userId}</td>
+              <td>{res.trainId}</td>
               {userRole === "Admin" && (
               <td>
-                <Link
-                    to={`/train/edit/${res.id}`}
-                    className="btn btn-primary btn-sm mr-2 edit-btn"
-                    style={{ marginRight: "10px" }}>
-                    Edit
-                  </Link>
                   <div className="px-2"/>
                   <button
                     className="btn btn-danger btn-sm"
@@ -97,26 +85,20 @@ const Reservation = () => {
                     Delete
                   </button>
                   <div className="px-2"/>
-                  <Link to={`/train/ReserveTrain`}
-                  className="btn btn-success btn-sm mr-2 edit-btn"
-                  style={{ marginRight: "10px" }}>
-                  Book
-                  </Link>
                 </td>
-                )}
-                {userRole === "Passenger" && (
-                  <td>
-                  <Link to={`/train/ReserveTrain`}
-                  className="btn btn-success btn-sm mr-2 edit-btn"
-                  style={{ marginRight: "10px" }}>
-                  Book
-                  </Link>
-                  </td>
                 )}
             </tr>
           ))}
         </tbody>
       </table>
+
+      {userRole === "Admin" && (
+        <Link to={`/train/ReserveTrain`}
+                  className="btn btn-outline-success btn-sm mr-2 edit-btn"
+                  style={{ marginRight: "10px" }}>
+                  Add Reservation
+        </Link>
+      )}
     </div>
     </>
   );
