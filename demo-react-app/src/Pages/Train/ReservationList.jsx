@@ -28,6 +28,7 @@ const Reservation = () => {
             .then((res) => {
               if (res.ok) {
                 alert("Reservation Removed successfully.");
+                window.location.reload();
                 setReserve(
                   reserve.filter((res) => res.id !== id)
                 );
@@ -142,6 +143,7 @@ const Reservation = () => {
         </tbody>
         )}
       </table>
+      {/* normal users can reserve and admin can only view all the reservations */}
         {/* <Link to={`/train/ReserveTrain`}
                   className="btn btn-outline-success btn-sm mr-2 edit-btn"
                   style={{ marginRight: "10px" }}>

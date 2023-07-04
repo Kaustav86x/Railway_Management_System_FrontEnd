@@ -11,6 +11,8 @@ const AddTrain = () => {
   const [deptTime, setDeptTime] = useState('');
   const [dateOfDeparture, setDateOfDeparture] = useState('');
   const [duration, setDuration] = useState(0);
+  const [TDC, tdcId] = useState(0);
+  const [seats, setSeats] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -25,19 +27,34 @@ const AddTrain = () => {
       Dept_time: deptTime,
       DateOfDeparture: dateOfDeparture,
       Duration: duration,
+      TDC : TDC,
+      Available_Seats: seats
     };
-    try {
-      const response = await fetch('/api/Train_detail/AddTrains', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(addTrainData),
+    const token = localStorage.getItem('token');
+    const userRole = localStorage.getItem("userRole");
+    fetch(`https://localhost:7001/api/Train_detail/AddTrains`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(addTrainData),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert('Train added successfully!');
+          // history.push('/');
+          window.location.href = "http://localhost:5173/TrainListing";
+        } else {
+          throw new Error('Error adding train');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      const data = await response.json();
-      setSuccessMessage(data);
-    } catch (error) {
-      setErrorMessage(error);
-    }
   };
+
+  
 
   return (
     <>
@@ -49,9 +66,9 @@ const AddTrain = () => {
           <Form.Label>Train Name</Form.Label>
           <Form.Control
             type="text"
-            // name="trainName"
-            value={trainName}
-            onChange={(e) => setTrainName(e.targte.value)}
+            name="trainName"
+            // value={trainName}
+            onChange={(e) => setTrainName(e.target.value)}
             required
           />
         </Form.Group>
@@ -60,8 +77,8 @@ const AddTrain = () => {
           <Form.Control
             type="text"
             name="source"
-            value={source}
-            onChange={(e) => setSource(e.targte.value)}
+            // value={source}
+            onChange={(e) => setSource(e.target.value)}
             required
           />
         </Form.Group>
@@ -70,8 +87,8 @@ const AddTrain = () => {
           <Form.Control
             type="text"
             name="destination"
-            value={destination}
-            onChange={(e) => setDestination(e.targte.value)}
+            // value={destination}
+            onChange={(e) => setDestination(e.target.value)}
             required
           />
         </Form.Group>
@@ -80,8 +97,8 @@ const AddTrain = () => {
           <Form.Control
             type="text"
             name="arrivalTime"
-            value={arrTime}
-            onChange={(e) => setArrTime(e.targte.value)}
+            // value={arrTime}
+            onChange={(e) => setArrTime(e.target.value)}
             required
           />
         </Form.Group>
@@ -90,8 +107,8 @@ const AddTrain = () => {
           <Form.Control
             type="text"
             name="departureTime"
-            value={deptTime}
-            onChange={(e) => setDeptTime(e.targte.value)}
+            // value={deptTime}
+            onChange={(e) => setDeptTime(e.target.value)}
             required
           />
         </Form.Group>
@@ -100,18 +117,38 @@ const AddTrain = () => {
           <Form.Control
             type="date"
             name="dateofdeparture"
-            value={dateOfDeparture}
-            onChange={(e) => setDateOfDeparture(e.targte.value)}
+            // value={dateOfDeparture}
+            onChange={(e) => setDateOfDeparture(e.target.value)}
             required
           />
         </Form.Group>
         <Form.Group controlId="duration">
           <Form.Label>Duration</Form.Label>
           <Form.Control
-            type="date"
+            type="number"
             name="duration"
-            value={duration}
-            onChange={(e) => setDuration(e.targte.value)}
+            // value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="tdc">
+          <Form.Label>TDC Id</Form.Label>
+          <Form.Control
+            type="string"
+            name="tdc"
+            // value={duration}
+            onChange={(e) => tdcId(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="seats">
+          <Form.Label>Available_Seats</Form.Label>
+          <Form.Control
+            type="number"
+            name="seats"
+            // value={duration}
+            onChange={(e) => tdcId(e.target.value)}
             required
           />
         </Form.Group>
@@ -120,7 +157,7 @@ const AddTrain = () => {
           Submit
         </button>
         <div className='py-2'/>
-        <Link to={`Train/GetAllTrains`}
+        <Link to={`Train/TrainListing`}
                   className="btn btn-outline-dark btn-sm mr-2 edit-btn"
                   style={{ marginRight: "10px" }}>
                   Train List

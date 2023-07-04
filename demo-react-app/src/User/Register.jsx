@@ -53,7 +53,7 @@ const Register = () => {
       .then((res) => {
         if (res.ok) {
           alert('User Registration successful !!');
-          window.location.href = "http://localhost:5173/dashboard";
+          window.location.href = "http://localhost:5173/login";
         } else {
           throw new Error('Error creating registration !');
         }
