@@ -18,6 +18,8 @@ import ReserveTrain from "./Pages/Train/AddReservation";
 import TicketForm from "./Pages/Ticket.jsx";
 import Reservation from "./Pages/Train/ReservationList";
 import { PaymentPage } from "./Pages/Payment";
+import AddTrain from "./Pages/Train/AddTrain";
+// import GetAllTrains from "./Pages/Train/TrainList";
 
 function App() {
   const[isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,9 +60,10 @@ function App() {
             <Route path="/Dashboard" exact element={<Dashboard/>}/>
             <Route path="/TrainListing" exact element={<TrainListing/>}/>
             <Route path="/Reservation" exact element={<Reservation/>}/>
-            <Route path="/train/ReserveTrain" exact element={<ReserveTrain/>}/>
-            <Route path="/train/" exact element={<TicketForm/>}/>
+            <Route path="/train/ReserveTrain/:trainId" exact element={<ReserveTrain/>}/>
+            {/* <Route path="/train/" exact element={<TicketForm/>}/> */}
             <Route path="/PaymentPage" exact element={<PaymentPage/>}/>
+            <Route path="/train/AddTrain" exact element={<AddTrain/>}/>
         </Routes>
         </div>
       </Router>

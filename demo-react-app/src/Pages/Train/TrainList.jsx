@@ -1,272 +1,39 @@
-// import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
-
-// const TrainListing = () => {
-//   const [trainData, setTrainData] = useState([]);
-
-//   useEffect(() => {
-//     const token = localStorage.getItem("token"); // Retrieve the token from local storage
-
-//     fetch("https://localhost:7001/api/Train_detail/GetTrainsByName", {
-//       headers: {
-//         Authorization: `Bearer ${token}`, // Include the token in the authorization header
-//       },
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setTrainData(data);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   }, []);
-
-//   const handleDelete = (id) => {
-//     const token = localStorage.getItem("token"); // Retrieve the token from local storage
-//     console.log(id);
-
-//     if (window.confirm("Do you want to remove?")) {
-//       fetch(`https://localhost:7100/api/Train_detail/${id}`, {
-//         method: "DELETE",
-//         headers: {
-//           Authorization: `Bearer ${token}`, // Include the token in the authorization header
-//         },
-//       })
-//         .then((res) => {
-//           if (res.ok) {
-//             alert("Removed successfully.");
-//             setTrainData(
-//               trainData.filter((train) => train.id !== id)
-//             );
-//           } else {
-//             throw new Error("Error deleting train");
-//           }
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     }
-//   };
-
-//   return (
-//     <div className="content-container">
-//       <h2 className="TrainListinghead">Train Listing</h2>
-//       {/* <Link to="/train/add" className=" add-train">
-//         Add Train
-//       </Link> */}
-//       <table className="table table-bordered tbl table-hover">
-//         <thead className="bg-dark text-white tableHead">
-//           <tr>
-//             <th>ID</th>
-//             <th>Train Name</th>
-//             <th>Source</th>
-//             <th>Destination</th>
-//             <th>Arrival Time</th>
-//             <th>Departure Time</th>
-//             <th>Date of Departure</th>
-//             <th>Duration</th>
-//             <th>Edit</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {trainData.map((train) => (
-//             <tr key={train.id}>
-//               <td>{train.id}</td>
-//               <td>{train.Train_name}</td>
-//               <td>{train.Source}</td>
-//               <td>{train.Destination}</td>
-//               <td>{train.Arr_time}</td>
-//               <td>{train.Dept_time}</td>
-//               <td>{train.DateOfDeparture}</td>
-//               <td>{train.Duration}</td>
-//               <td>
-//                 <Link
-//                   to={`/train/edit/${train.id}`}
-//                   className="btn btn-primary btn-sm mr-2 edit-btn"
-//                   style={{ marginRight: "10px" }}
-//                 >
-//                   Edit
-//                 </Link>
-//                 <button
-//                   className="btn btn-danger btn-sm"
-//                   onClick={() => handleDelete(train.id)}
-//                 >
-//                   Delete
-//                 </button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default TrainListing;
-
-// import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
-
-// const TrainListing = () => {
-//   const [trainData, setTrainData] = useState([]);
-//   const [searchQuery, setSearchQuery] = useState("");
-
-//   useEffect(() => {
-//     const token = localStorage.getItem("token"); // Retrieve the token from local storage
-
-//     let url = "https://localhost:7001/api/Train_detail/GetTrainsByName";
-//     if (searchQuery && searchQuery.trim()) {
-//       url += `?trainName=${searchQuery.trim()}`;
-//     }
-
-//     fetch(url, {
-//       headers: {
-//         Authorization: `Bearer ${token}`, // Include the token in the authorization header
-//       },
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setTrainData(data.json);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   }, [searchQuery]);
-
-//   const handleDelete = (id) => {
-//     const token = localStorage.getItem("token"); // Retrieve the token from local storage
-//     console.log(id);
-
-//     if (window.confirm("Do you want to remove?")) {
-//       fetch(`https://localhost:7001/api/Train_detail/${id}`, {
-//         method: "DELETE",
-//         headers: {
-//           Authorization: `Bearer ${token}`, // Include the token in the authorization header
-//         },
-//       })
-//         .then((res) => {
-//           if (res.ok) {
-//             alert("Removed successfully.");
-//             setTrainData(
-//               trainData.filter((train) => train.id !== id)
-//             );
-//           } else {
-//             throw new Error("Error deleting train");
-//           }
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     }
-//   };
-
-//   return (
-//     <div className="content-container">
-//       <h2 className="TrainListinghead">Train Listing</h2>
-//       <Link to="/train/add" className=" add-train">
-//         Add Train
-//       </Link>
-//       <input
-//         type="text"
-//         className="form-control mb-2"
-//         placeholder="Search by train name"
-//         value={searchQuery}
-//         onChange={(e) => setSearchQuery(e.target.value)}
-//       />
-//       <table className="table table-bordered tbl table-hover">
-//         <thead className="bg-dark text-white tableHead">
-//           <tr>
-//             <th>ID</th>
-//             <th>Train Name</th>
-//             <th>Source</th>
-//             <th>Destination</th>
-//             <th>Arrival Time</th>
-//             <th>Departure Time</th>
-//             <th>Date of Departure</th>
-//             <th>Duration</th>
-//             <th>Edit</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {trainData
-//             .filter((train) =>
-//               train.Train_name.toLowerCase().includes(searchQuery.toLowerCase())
-//             )
-//             .map((train) => (
-//               <tr key={train.id}>
-//                 <td>{train.id}</td>
-//                 <td>{train.Train_name}</td>
-//                 <td>{train.Source}</td>
-//                 <td>{train.Destination}</td>
-//                 <td>{train.Arr_time}</td>
-//                 <td>{train.Dept_time}</td>
-//                 <td>{train.DateOfDeparture}</td>
-//                 <td>{train.Duration}</td>
-//                 <td>
-//                   <Link
-//                     to={`/train/edit/${train.id}`}
-//                     className="btn btn-primary btn-sm mr-2 edit-btn"
-//                     style={{ marginRight: "10px" }}
-//                   >
-//                     Edit
-//                   </Link>
-//                   <button
-//                     className="btn btn-danger btn-sm"
-//                     onClick={() => handleDelete(train.id)}
-//                   >
-//                     Delete
-//                   </button>
-//                 </td>
-//               </tr>
-//             ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default TrainListing;
-
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Dashboard from "../DashBoard";
 import ReserveTrain from "./AddReservation";
+import AddTrain from "./AddTrain";
 
 const GetAllTrains = () => {
-  
   const [trainData, setTrainData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const userRole = localStorage.getItem("userRole");
 
   const handleDelete = (id) => {
-        const token = localStorage.getItem("token"); // Retrieve the token from local storage
-        // const userRole = localStorage.getItem("userRole");
-        console.log(id);
-    
-        if (window.confirm("Do you want to remove the train ?")) {
-          fetch(`https://localhost:7001/api/Train_detail/DeleteTrain?id=${id}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`, // Include the token in the authorization header
-            },
-          })
-            .then((res) => {
-              if (res.ok) {
-                alert("Removed successfully.");
-                setTrainData(
-                  trainData.filter((train) => train.id !== id)
-                );
-              } else {
-                throw new Error("Error deleting train");
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      };
+    const token = localStorage.getItem("token");
+    console.log(id);
+
+    if (window.confirm("Do you want to remove the train ?")) {
+      fetch(`https://localhost:7001/api/Train_detail/DeleteTrain?id=${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            alert("Removed successfully.");
+            setTrainData(trainData.filter((train) => train.id !== id));
+          } else {
+            throw new Error("Error deleting train");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   useEffect(() => {
     fetch("https://localhost:7001/api/Train_detail/GetTrains")
@@ -279,76 +46,106 @@ const GetAllTrains = () => {
       });
   }, []);
 
-  console.log(trainData);
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredTrainData = trainData.filter((train) =>
+    train.train_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
-    <Dashboard/>
-    <div className="content-container">
-      <h2 className="Trainhead text-center">Available Trains</h2>
+      <Dashboard />
+      <div className="content-container">
+        <h2 className="Trainhead text-center">Available Trains</h2>
 
-      <table className="table table-bordered tbl table-hover">
-        <thead className="bg-dark text-white tableHead">
-          <tr>
-            <th>ID</th>
-            <th>Train Name</th>
-            <th>Source</th>
-            <th>Destination</th>
-            <th>Arrival Time</th>
-            <th>Departure Time</th>
-            <th>Date of Departure</th>
-            <th>Duration</th>
-            {userRole === "Admin" && <th>Edit</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {trainData.map((train) => (
-            // all the data must be uniquly defined inside the <td> tags
-            <tr key={train.Id}>
-              <td>{train.id}</td>
-              <td>{train.train_name}</td>
-              <td>{train.source}</td>
-              <td>{train.destination}</td>
-              <td>{train.arr_time}</td>
-              <td>{train.dept_time}</td>
-              <td>{train.dateOfDeparture}</td>
-              <td>{train.duration} hours</td>
-              {userRole === "Admin" && (
-              <td>
-                <Link
-                    to={`/train/edit/${train.id}`}
-                    className="btn btn-primary btn-sm mr-2 edit-btn"
-                    style={{ marginRight: "10px" }}>
-                    Edit
-                  </Link>
-                  <div className="px-2"/>
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(train.id)}>
-                    Delete
-                  </button>
-                  <div className="px-2"/>
-                  <Link to={`/train/ReserveTrain`}
-                  className="btn btn-success btn-sm mr-2 edit-btn"
-                  style={{ marginRight: "10px" }}>
-                  Book
-                  </Link>
-                </td>
+        <div className="input-group mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search train by name"
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </div>
+
+        <table className="table table-bordered tbl table-hover">
+          <thead className="bg-dark text-white tableHead">
+            <tr>
+              <th>ID</th>
+              <th>Train Name</th>
+              <th>Source</th>
+              <th>Destination</th>
+              <th>Arrival Time</th>
+              <th>Departure Time</th>
+              <th>Date of Departure</th>
+              <th>Duration</th>
+              {userRole === "Admin" && <th>Edit</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {filteredTrainData.map((train) => (
+              <tr key={train.id}>
+                <td>{train.id}</td>
+                <td>{train.train_name}</td>
+                <td>{train.source}</td>
+                <td>{train.destination}</td>
+                <td>{train.arr_time}</td>
+                <td>{train.dept_time}</td>
+                <td>{train.dateOfDeparture}</td>
+                <td>{train.duration} hours</td>
+                {userRole === "Admin" && (
+                  <td>
+                    <Link
+                      to={`/train/edit/${train.id}`}
+                      className="btn btn-primary btn-sm mr-2 edit-btn"
+                      style={{ marginRight: "10px" }}
+                    >
+                      Edit
+                    </Link>
+                    <div className="px-2" />
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleDelete(train.id)}
+                    >
+                      Delete
+                    </button>
+                    <div className="px-2" />
+                    <Link
+                      to={`/train/ReserveTrain/${train.id}`}
+                      className="btn btn-success btn-sm mr-2 edit-btn"
+                      style={{ marginRight: "10px" }}
+                    >
+                      Book
+                    </Link>
+                  </td>
                 )}
                 {userRole === "Passenger" && (
                   <td>
-                  <Link to={`/train/ReserveTrain`}
-                  className="btn btn-success btn-sm mr-2 edit-btn"
-                  style={{ marginRight: "10px" }}>
-                  Book
-                  </Link>
+                    <Link
+                      to={`/train/ReserveTrain/${train.id}`}
+                      className="btn btn-success btn-sm mr-2 edit-btn"
+                      style={{ marginRight: "10px" }}
+                    >
+                      Book
+                    </Link>
                   </td>
                 )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {userRole === "Admin" && (
+          <Link
+            to={`/train/AddTrain`}
+            className="btn btn-outline-success btn-smmr-2 edit-btn"
+            style={{ marginRight: "10px" }}
+          >
+            Add Train
+          </Link>
+        )}
+      </div>
     </>
   );
 };

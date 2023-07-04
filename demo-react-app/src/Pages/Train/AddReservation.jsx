@@ -4,16 +4,18 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from '../DashBoard';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const ReserveTrain = () => {
+  const {trainId} = useParams();
+
   const [reservData, setreservData] = useState([]);
   const [reservationData, setReservationData] = useState({
     rid:'',
     passenger: '',
     date: '',
     userId: '',
-    trainId: '',
+    trainId: trainId,
   });
 
 //   const history = useHistory();
@@ -71,16 +73,6 @@ const ReserveTrain = () => {
     <div className="content-container">
       <h2 className='text-center'>Create Reservation</h2>
       <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="rid">
-          <Form.Label>ID</Form.Label>
-          <Form.Control
-            type="text"
-            name="rid"
-            value={reservationData.rid}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
         <Form.Group controlId="passenger">
           <Form.Label>Passenger</Form.Label>
           <Form.Control

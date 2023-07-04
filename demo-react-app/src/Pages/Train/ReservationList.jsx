@@ -6,14 +6,16 @@ import ReserveTrain from "./AddReservation";
 
 const Reservation = () => {
   
-  const [reserve, setReserve] = useState([]);
+  const [reserveAdmin, setReserveAdmin] = useState([]);
+  const [reservePassenger, setReservePassenger] = useState([]);
+  const [cancelledIds, setCancelledIds] = useState([]);
+
   const userRole = localStorage.getItem("userRole");
   // fetching the current logged in name
   const userName = localStorage.getItem("userName");
 
   const handleDelete = (id) => {
         const token = localStorage.getItem("token"); // Retrieve the token from local storage
-        // const userRole = localStorage.getItem("userRole");
         console.log(id);
     
         if (window.confirm("Do you want to remove the reservation ?")) {
@@ -38,25 +40,40 @@ const Reservation = () => {
             });
         }
       };
+      const handleCancel = (id) => {
+        setCancelledIds([...cancelledIds, id]);
+      };
 
-  useEffect(() => {
-    fetch("https://localhost:7001/api/Reservation/GetReservations")
-      .then((res) => res.json())
-      .then((data) => {
-        setReserve(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+      const isCancelled = (id) => {
+        return cancelledIds.includes(id);
+      };
 
-  console.log(reserve);
+      useEffect(() => {
+        fetch("https://localhost:7001/api/Reservation/GetReservations")
+          .then((res) => res.json())
+          .then((data) => {
+            const filteredData = data.filter((reservation) => reservation.passenger === userName);
+            setReservePassenger(filteredData);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, []);
 
-  // const elements = [];
-  // for (let i in reserve)
-  // {
-  //   if(userName === i.)
-  // }
+      useEffect(() => {
+        fetch("https://localhost:7001/api/Reservation/GetReservations")
+        .then((res) => res.json())
+          .then((data) => {
+            setReserveAdmin(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, []);
+
+  console.log(reserveAdmin);
+  // console.log(userRole);
+  // console.log(userName);
 
   return (
     <>
@@ -73,11 +90,35 @@ const Reservation = () => {
             <th>User ID</th>
             <th>Train ID</th>
             {userRole === "Admin" && <th>Edit</th>}
-            {userRole === "Passenger" && <th>  </th>}
+            {userRole === "Passenger" && <th>{ }</th>}
           </tr>
         </thead>
-        <tbody>
-          {reserve.map((res) => (
+        {userRole === "Passenger" ? (
+          <tbody>
+          {reservePassenger.map((res) => (
+            // all the data must be uniquly defined inside the <td> tags
+            <tr key={res.Id}>
+              <td>{res.id}</td>
+              <td>{res.passenger}</td>
+              <td>{res.date}</td>
+              <td>{res.userId}</td>
+              <td>{res.trainId}</td>
+              <td>
+                  <div className="px-2"/>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleCancel(res.id)}
+                    disabled={isCancelled(res.id)}>
+                    {isCancelled(res.id) ? 'Cancelled' : 'Cancel'}
+                  </button>
+                  <div className="px-2"/>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        ) : (
+          <tbody>
+          {reserveAdmin.map((res) => (
             // all the data must be uniquly defined inside the <td> tags
             <tr key={res.Id}>
               <td>{res.id}</td>
@@ -99,13 +140,13 @@ const Reservation = () => {
             </tr>
           ))}
         </tbody>
-        {/* )} */}
+        )}
       </table>
-        <Link to={`/train/ReserveTrain`}
+        {/* <Link to={`/train/ReserveTrain`}
                   className="btn btn-outline-success btn-sm mr-2 edit-btn"
                   style={{ marginRight: "10px" }}>
                   Add Reservation
-        </Link>
+        </Link> */}
     </div>
     </>
   );
