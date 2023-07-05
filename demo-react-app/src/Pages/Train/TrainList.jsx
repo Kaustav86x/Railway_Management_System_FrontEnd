@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import Dashboard from "../DashBoard";
 import ReserveTrain from "./AddReservation";
 import AddTrain from "./AddTrain";
+import './TrainList.css';
 
-const GetAllTrains = () => {
+const TrainListing = () => {
   const [trainData, setTrainData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const userRole = localStorage.getItem("userRole");
@@ -97,13 +98,13 @@ const GetAllTrains = () => {
                 <td>{train.duration} hours</td>
                 {userRole === "Admin" && (
                   <td>
-                    <Link
+                    {/* <Link
                       to={`/train/edit/${train.id}`}
                       className="btn btn-primary btn-sm mr-2 edit-btn"
                       style={{ marginRight: "10px" }}
                     >
                       Edit
-                    </Link>
+                    </Link> */}
                     <div className="px-2" />
                     <button
                       className="btn btn-danger btn-sm"
@@ -150,4 +151,4 @@ const GetAllTrains = () => {
   );
 };
 
-export default GetAllTrains;
+export default TrainListing;

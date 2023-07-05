@@ -1,0 +1,18 @@
+/* .home-page
+{
+    position: relative;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container
+{
+    position: absolute;
+    width: 100%;
+    height: 128vh;
+    background-image: url('src/Images/2.png'); 
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+} 

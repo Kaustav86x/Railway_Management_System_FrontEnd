@@ -25,18 +25,6 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await axios.post('https://localhost:7001/api/User/SignUp', formData);
-  //     if (response.status === 200) {
-  //       alert("Explore more with Flash Track")
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -52,7 +40,7 @@ const Register = () => {
     })
       .then((res) => {
         if (res.ok) {
-          alert('User Registration successful !!');
+          // alert('User Registration successful !!');
           window.location.href = "http://localhost:5173/login";
         } else {
           throw new Error('Error creating registration !');
@@ -66,106 +54,6 @@ const Register = () => {
   return (
     <>
       <Navbar/>
-      {/* <div className="row d-flex justify-content-center h-50">
-        <div className="col-7">
-          <div className="card bg-light mt-5 text-center"
-            id="registerCard" style={{ borderradius: "1rem" }}>
-          </div>
-          <div className="row d-flex justify-content-center"></div>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="userType">
-              <Form.Label>Select User Type</Form.Label>
-              <Form.Control as="select" onChange={handleUserTypeChange}>
-                <option value="">Select</option>
-                <option value="Admin">Admin</option>
-                <option value="Passsenger">Passenger</option>
-              </Form.Control>
-            </Form.Group>
-
-      <div className="form-outline form-white mb-2">
-              <label className="form-label mt-1">First Name : </label>
-              <input
-                type="text"
-                className="form-control"
-                name="fname"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                placeholder="First Name"
-                required
-              />
-          </div>
-            <div className="form-outline form-white mb-2">
-              <label className="form-label mt-1">Last Name: </label>
-              <input
-                type="text"
-                className="form-control"
-                name="lname"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                placeholder="Last Name"
-                required
-              />
-            </div>
-              <div className="form-outline form-white mb-2">
-              <label className="form-label mt-1">Phone: </label>
-              <input
-                type="number"
-                className="form-control"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                placeholder="Phone"
-                required
-              />
-            </div>
-            <div className="form-outline form-white mb-2">
-              <label className="form-label mt-1">Email: </label>
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Email"
-                required
-              />
-            </div>
-            <div className="form-outline form-white mb-2">
-              <label className="form-label mt-1">Password: </label>
-              <input
-                type="password"
-                className="form-control"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Password"
-                required
-              />
-            </div>
-            <div className="form-outline form-white mb-2">
-              <label className="form-label mt-1">Role: </label>
-              <input
-                type="role"
-                className="form-control"
-                name="role"
-                value={formData.role}
-                onChange={handleInputChange}
-                placeholder="RoleId"
-                required
-              />
-            </div>
-            <button
-                  className="btn btn-outline-dark btn-md px-5 login-btn"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                  <span>
-                    <BiPowerOff />
-                  </span>
-                </button>
-    </Form>
-    </div>
-    </div> */}
     <Container className="todo-container">
         <div className="row d-flex justify-content-center h-50">
           <div className="col-7">
@@ -180,9 +68,11 @@ const Register = () => {
         <p className="text-black-50 mb-5">
           Please enter your details!
         </p>
-        <div className='py-3'/>
+        <p className="mt-2 checker-acc">
+            Already have an account? <Link to="/login">Login</Link></p>
+        <div className='py-1'/>
         <Form onSubmit={handleSubmit}>
-          <div className='py-3'/>
+          <div className='py-1'/>
           <Form.Group controlId="formFirstName">
             <input
                 type="text"

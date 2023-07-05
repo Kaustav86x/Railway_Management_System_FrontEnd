@@ -1,11 +1,15 @@
 import React from 'react'
 import Dashboard from './DashBoard'
+import { Link, useParams } from 'react-router-dom';
 
-export const PaymentPage = () => {
+const Payment = () => {
+
   return (
     <>
     <Dashboard/>
     </>
   )
-}
+};
+
+export default Payment;
 

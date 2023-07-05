@@ -44,9 +44,9 @@ function Contact() {
           <hr/>
           <p>Feel free to contact us with any questions or concerns:</p>
           <ul>
-            <li>Phone: 555-555-5555</li>
+            <li>Phone: +91-9330360552</li>
             <li>Email: deyk@railway.com</li>
-            <li>Address: 123 Main St, Delhi, India</li>
+            <li>Address: 76 Main St, Delhi, India</li>
           </ul>
         </Col>
       </Row>

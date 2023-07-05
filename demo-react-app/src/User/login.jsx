@@ -46,16 +46,11 @@ import Dashboard from "../Pages/DashBoard.jsx";
               // Saving the role in local storage
               localStorage.setItem("userRole",data.userRole);
               localStorage.setItem("userName",data.userName);
-              window.alert("Login successful!");
-              // Redirect to /units
             window.location.href = "http://localhost:5173/dashboard";
             })
             .catch((error) => {
               console.log(error);
               window.alert("Login failed. Please try again.");
-            //   setMessage("alert-danger show");
-              //window.location.reload();
-              // Reload the page
             });
         };
   return (

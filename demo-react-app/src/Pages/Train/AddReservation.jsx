@@ -10,6 +10,7 @@ const ReserveTrain = () => {
   const {trainId} = useParams();
 
   const [reservData, setreservData] = useState([]);
+
   const [reservationData, setReservationData] = useState({
     rid:'',
     passenger: '',
@@ -41,8 +42,6 @@ const ReserveTrain = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const res_id = prompt("Enter the resid");
-    // reservationData.rid = res_id;
     const token = localStorage.getItem('token');
     const userRole = localStorage.getItem("userRole");
     fetch(`https://localhost:7001/api/Reservation/AddReservation`, {

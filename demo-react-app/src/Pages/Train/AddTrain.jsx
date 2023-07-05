@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Dashboard from '../DashBoard';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './AddTrain.css';
 
 const AddTrain = () => {
   const [trainName, setTrainName] = useState('');
@@ -43,7 +44,6 @@ const AddTrain = () => {
       .then((res) => {
         if (res.ok) {
           alert('Train added successfully!');
-          // history.push('/');
           window.location.href = "http://localhost:5173/TrainListing";
         } else {
           throw new Error('Error adding train');
@@ -133,7 +133,7 @@ const AddTrain = () => {
           />
         </Form.Group>
         <Form.Group controlId="tdc">
-          <Form.Label>TDC Id</Form.Label>
+          <Form.Label>TCD Id</Form.Label>
           <Form.Control
             type="string"
             name="tdc"
@@ -143,12 +143,12 @@ const AddTrain = () => {
           />
         </Form.Group>
         <Form.Group controlId="seats">
-          <Form.Label>Available_Seats</Form.Label>
+          <Form.Label>Available Seats</Form.Label>
           <Form.Control
             type="number"
             name="seats"
             // value={duration}
-            onChange={(e) => tdcId(e.target.value)}
+            onChange={(e) => setSeats(e.target.value)}
             required
           />
         </Form.Group>
@@ -157,7 +157,7 @@ const AddTrain = () => {
           Submit
         </button>
         <div className='py-2'/>
-        <Link to={`Train/TrainListing`}
+        <Link to={`train/TrainListing`}
                   className="btn btn-outline-dark btn-sm mr-2 edit-btn"
                   style={{ marginRight: "10px" }}>
                   Train List

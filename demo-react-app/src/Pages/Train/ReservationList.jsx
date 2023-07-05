@@ -3,16 +3,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Dashboard from "../DashBoard";
 import ReserveTrain from "./AddReservation";
+import Swal from "sweetalert2";
+import './ReservationList.css';
 
 const Reservation = () => {
   
   const [reserveAdmin, setReserveAdmin] = useState([]);
   const [reservePassenger, setReservePassenger] = useState([]);
   const [cancelledIds, setCancelledIds] = useState([]);
+  const [reservationById, setReservationById] = useState([]);
 
   const userRole = localStorage.getItem("userRole");
   // fetching the current logged in name
   const userName = localStorage.getItem("userName");
+
+  const handlePayment = (id) => {
+    Swal.fire("Payment successfull. Ticket has been generated");
+    window.location.href = "http://localhost:5173/dashboard";
+  }
 
   const handleDelete = (id) => {
         const token = localStorage.getItem("token"); // Retrieve the token from local storage
@@ -73,8 +81,6 @@ const Reservation = () => {
       }, []);
 
   console.log(reserveAdmin);
-  // console.log(userRole);
-  // console.log(userName);
 
   return (
     <>
@@ -112,6 +118,21 @@ const Reservation = () => {
                     disabled={isCancelled(res.id)}>
                     {isCancelled(res.id) ? 'Cancelled' : 'Cancel'}
                   </button>
+                  <button
+                  // {reservationById.map((resId) => (
+
+                  // ))}
+                    className="btn btn-sm btn-outline-success"
+                    onClick={() => handlePayment()}>
+                    Pay now
+                  </button>
+                  {/* <Link
+                      to={`/train/Reservation`}
+                      className="btn btn-success btn-sm mr-2 edit-btn"
+                      style={{ marginRight: "10px" }}
+                    >
+                      Book
+                    </Link> */}
                   <div className="px-2"/>
               </td>
             </tr>
@@ -143,12 +164,6 @@ const Reservation = () => {
         </tbody>
         )}
       </table>
-      {/* normal users can reserve and admin can only view all the reservations */}
-        {/* <Link to={`/train/ReserveTrain`}
-                  className="btn btn-outline-success btn-sm mr-2 edit-btn"
-                  style={{ marginRight: "10px" }}>
-                  Add Reservation
-        </Link> */}
     </div>
     </>
   );
